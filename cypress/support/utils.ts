@@ -84,9 +84,8 @@ export async function runTest(test: string) {
 }
 
 export async function runTests() {
-  for (const test of readdirSync(E2E_DIR)) {
-    await runTest(test);
-  }
+  runCommand("pnpm exec ts-node ./cypress/support/run.ts action")
+  runSpec("*")
 }
 
 function runCommand(command: string, cwd = ROOT) {
@@ -107,7 +106,7 @@ export function runSpec(test: string) {
   // Recording the cypress run is time consuming. Disabled by default.
   // const recordOptions = ` --record --key ${process.env.CYPRESS_RECORD_KEY} `;
   return runCommand(
-    `pnpm exec cypress run --record false --spec cypress/e2e/${test}/spec.cy.ts`
+    `pnpm exec cypress run --record false --spec "cypress/e2e/${test}/spec.cy.ts"`
   );
 }
 

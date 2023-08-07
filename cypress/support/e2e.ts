@@ -10,11 +10,11 @@ async function main() {
     await installChainlit();
   }
 
-  if (singleTest) {
-    await runTest(singleTest);
-  } else {
+  // if (singleTest) {
+  //   await runTest(singleTest);
+  // } else {
     await runTests();
-  }
+  //}
 }
 
 main()

@@ -1,3 +1,5 @@
+import { runTestServer } from "../../support/testUtils";
+
 function testPlayground(index, shouldContain: string) {
   cy.get(".playground-button").eq(index).should("exist").click();
 
@@ -12,9 +14,7 @@ function testPlayground(index, shouldContain: string) {
 
 describe("Llama Index Callback", () => {
   before(() => {
-    cy.intercept("/project/settings").as("settings");
-    cy.visit("http://127.0.0.1:8000");
-    cy.wait(["@settings"]);
+    runTestServer()
   });
 
   it("should be able to send messages to the UI with prompts and elements", () => {
